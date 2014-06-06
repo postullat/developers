@@ -1,0 +1,76 @@
+@CHARSET "UTF-8";
+
+body {}
+a { color:#018BC1;}
+a:hover { text-decoration:none;}
+
+#header {
+    line-height:39px;
+    font-family: Tahoma, Arial;
+    background: url(../../img/theme/body_top_bckg.jpg) no-repeat center top ;
+    color:#bed7e6;
+    font-size:11px;
+    height: 370px;
+    margin-bottom: -30px;
+}
+
+#logo { 
+    padding:120px 0 100px 0;
+    color:#fff;
+    text-align:center;
+}
+
+#logo a{ color:#fff;
+
+	text-decoration:none;
+    font-weight:bold;
+    font-size:30px;
+    text-transform:uppercase;
+    
+      text-shadow: 0 0 4px  #ccc,
+  0 -5px 4px #ff3,
+  2px -10px 6px #fd3,
+  -2px -15px 11px #f80,
+  2px -18px 18px #f20;
+}
+
+#menu {
+    color:#fff;
+    text-align:center;
+    margin-bottom:62px;
+}
+
+#menu ul {text-align:center;
+     list-style:none;
+     padding:0;
+}
+
+#menu ul li {display:inline; position: relative;}
+
+#menu ul a { font-weight:bold;
+ font-size:14px;
+  text-decoration:none;
+   color:#fff;
+    background-color:#445d6c;
+     padding:0 10px 2px 10px;
+}
+
+#menu ul a:hover { background-color:#f26513;}
+ul li{position: relative;}
+
+
+#listOfcountUserOnline{
+	 color:#fff;
+    text-align:center;
+    position: absolute;
+	display: none;
+	left: 0;
+	top:15px;
+	line-height:normal; 
+	 text-align:left;
+}
+#listOfcountUserOnline li{
+	margin-top: 5px;
+	float: left;
+	
+}

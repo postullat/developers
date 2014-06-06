@@ -1,0 +1,143 @@
+@CHARSET "UTF-8";
+
+body {
+	margin: 0;
+	/*background: center top #171c20;*/
+	background: url("../img/background.jpg") no-repeat center center #171c20;
+	line-height: 16px;
+	font-family: Tahoma, Arial;
+	color: #bed7e6;
+	font-size: 11px;
+	
+}
+
+a {
+	color: #018BC1;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+#main {
+	background: url(../img/theme/body_all_bckg.jpg) repeat-y top center;
+	width:1000px;
+	margin:0 auto;
+	
+}
+
+#content {
+	width: 780px;
+	margin: 0 auto;
+}
+
+#text {
+	margin-top: 30px;
+	width: 520px;
+}
+
+#text p {
+	margin: 7px 0 7px 0;
+}
+
+#text li {
+	background: url(../img/theme/li.gif) no-repeat 0px 7px;
+}
+
+#sidebar {
+	float: right;
+	width: 227px;
+	background-color: #0b0e10;
+	margin: 10px 10px 0 0;
+}
+
+#sidebar_top {
+	width: 227px;
+	height: 40px;
+	background: url(../img/theme/sidebar_top.jpg) no-repeat;
+}
+
+#sidebar_text {
+    padding: 10px;
+}
+
+#sidebar_text p {
+	margin: 5px 0 5px 0;
+}
+
+#sidebar_bottom {
+	width: 227px;
+	height: 57px;
+	background: url(../img/theme/sidebar_bottom.jpg) no-repeat;
+}
+
+#sidebar h2 {
+	font-size: 13px;
+	text-transform: uppercase;
+	color: #fff;
+	margin: 20px 0 0 0;
+	padding: 0;
+	background: none;
+}
+
+h1 {
+	margin: 30px 0 0 0;
+	padding: 5px 0 7px 45px;
+	text-transform: uppercase;
+	font-size: 24px;
+	color: #fff;
+	background: url(../img/theme/h1_bckg.jpg) no-repeat;
+}
+
+#footer {
+	background: url(../img/theme/footer_bckg.jpg) no-repeat top center;
+	height: 102px;
+	clear: both;
+	width: 780px;
+	margin: 0 auto;
+}
+
+#left_footer {
+	float: left;
+	padding: 60px 0 0 30px;
+	color: #fff;
+	font-size: 12px;
+}
+
+#left_footer a {
+	color: #fff;
+}
+
+#left_footer a:hover {
+	text-decoration: none;
+}
+
+#right_footer {
+	float: right;
+	padding: 60px 30px 0 0;
+	color: #fff;
+	font-size: 12px;
+	text-align: right;
+}
+
+#right_footer a {
+	color: #fff;
+}
+
+#right_footer a:hover {
+	text-decoration: none;
+}
+
+.welcome{
+	color: #ff9933;
+	text-align: center;
+	font-size: 15pt;
+	line-height: 1.5;
+	
+}
+.main_text{
+	color:#99ccff;
+	margin-left:150px;
+	font-size: 12pt; 
+	line-height: 1.5
+}

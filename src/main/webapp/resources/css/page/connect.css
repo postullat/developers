@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+
+.buttonConn {
+	background: url(../../img/theme/button.jpg) no-repeat -1px -1px;
+	width: 115px;
+	height: 25px;
+	cursor: pointer;
+	text-align: center;
+	padding-top: 10px;
+}
+
+.buttonConn:hover {
+	background: url(../../img/theme/button_hover.jpg) no-repeat -1px -1px;
+	width: 115px;
+	height: 25px;
+	cursor: pointer;
+	text-align: center;
+	padding-top: 10px;
+}
+
+.buttonJoin {
+	background: url(../../img/theme/button.jpg) no-repeat -1px -1px;
+	width: 115px;
+	height: 25px;
+	cursor: pointer;
+	text-align: center;
+	padding-top: 10px;
+	border-radius: 10px;
+}
+
+.buttonJoin:hover {
+	background: url(../../img/theme/button_hover.jpg) no-repeat -1px -1px;
+	width: 115px;
+	height: 25px;
+	cursor: pointer;
+	text-align: center;
+	padding-top: 10px;
+	border-radius: 10px;
+}
+
+#divTableGames {
+	margin: 30px auto 30px auto;
+	width: 500px;
+}
+
+td {
+	vertical-align: middle;
+}
+
+tr {
+	height: 45px;
+}
+
+tr:hover {
+	height: 45px;
+	background-color: #0d1114;
+}
+
+#createGame {
+	margin: 0 auto;
+}

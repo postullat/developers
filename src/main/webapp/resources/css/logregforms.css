@@ -1,0 +1,88 @@
+@CHARSET "UTF-8";
+/*стиль для таблички реєстрації*/
+#tableRegister{
+	width: 200px;
+}
+#tableLogin{
+	width: 200px;
+}
+/*кнопочка зареєструвати*/
+#s_Register{
+	width: 200px;
+}
+#s_Login{
+	width: 200px;
+}
+	
+
+#divFormLogin {
+    display: none;
+}
+
+#divFormRegister {
+    display: none;
+}
+
+#registerField {
+    display: none;
+    margin: 10px 0 0 100px;
+
+}
+
+#btnLogout {
+    display: none;
+    margin: 10px 0 0 100px;
+    cursor: pointer;
+}
+
+
+.formError {
+    color: red;
+    text-align: center;
+}
+
+.login_button {
+	color: #fef4e9;
+	border: solid 1px #da7c0c;
+	background: #f78d1d;
+	background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+	background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+}
+}
+.login_button:hover {
+	background: #f47c20;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+	background: -moz-linear-gradient(top,  #f88e11,  #f06015);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+}
+.login_button:active {
+	border: solid 1px #003366;
+	color: #ffffff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+	background: -moz-linear-gradient(top,  #3399ff,  #003399);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+	
+}
+
+.register_button {
+	color: #fef4e9;
+	border: solid 1px #003366;
+	background: #3399ff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#3399ff), to(#003366));
+	background: -moz-linear-gradient(top,  #3399ff,  #003366);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#3399ff', endColorstr='#003366');
+}
+}
+.register_button:hover {
+	background: #003366;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+	background: -moz-linear-gradient(top,  #003366,  #3399ff);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+}
+.register_button:active {
+		color: #fcd3a5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+	background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+}
