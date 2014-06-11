@@ -68,10 +68,6 @@
 
 	</dependencies>
 
-
-
-
-
 	<build>
 		<resources>
 			<resource>
@@ -119,15 +115,16 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>test</id>
+			<id>jelastic</id>
 			<properties>
-				<jdbc-db-host>localhost</jdbc-db-host>
 				<jdbc-db-name>developers</jdbc-db-name>
 				<jdbc-db-port>3306</jdbc-db-port>
 				<jdbc-db-username>root</jdbc-db-username>
-				<jdbc-db-password>root</jdbc-db-password>
-				<jdbc-db-url>jdbc:mysql://${jdbc-db-host}:${jdbc-db-port}/${jdbc-db-name}</jdbc-db-url>
+				<jdbc-db-password>****</jdbc-db-password>
 				<jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+				<jelastic-env-name>******</jelastic-env-name>
+				<jelastic-domain>*****</jelastic-domain>
+				<jdbc-db-url>jdbc:mysql://mysql-${jelastic-env-name}.${jelastic-domain}/${jdbc-db-name}</jdbc-db-url>
 			</properties>
 		</profile>
 	</profiles>

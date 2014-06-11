@@ -18,14 +18,12 @@ public abstract class JdbcConnection {
 		PropertyUtil.initialize();
 		try {
 			Class.forName(PropertyUtil.getProperty(Settings.JDBC_DRIVER));
+			url = PropertyUtil.getProperty(Settings.JDBC_DB_URL);
+			userName = PropertyUtil.getProperty(Settings.JDBC_DB_USER_NAME);
+			password = PropertyUtil.getProperty(Settings.JDBC_DB_PASSWORD);
+			conn = DriverManager.getConnection(url, userName, password);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		url = PropertyUtil.getProperty(Settings.JDBC_DB_URL);
-		userName = PropertyUtil.getProperty(Settings.JDBC_DB_USER_NAME);
-		password = PropertyUtil.getProperty(Settings.JDBC_DB_PASSWORD);
-		try {
-			conn = DriverManager.getConnection(url, userName, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

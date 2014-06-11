@@ -21,9 +21,7 @@ public class PropertyUtil {
             fileProp.load(stream);
             
             for(Entry<Object, Object> prop : fileProp.entrySet()) {
-            	String key = (String)prop.getKey();
-            	String value = (String)prop.getValue();
-            	props.put(key, value);
+            	props.put((String)prop.getKey(), (String)prop.getValue());
             
             }
         } catch(Exception e) {
