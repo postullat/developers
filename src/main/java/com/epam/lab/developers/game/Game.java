@@ -13,16 +13,12 @@ import com.epam.lab.developers.game.map.algorithm_way.MapWrapper;
 
 public class Game {
 
-	public static final float CODE_LINES = 1000; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅ
-												// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-												// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅФІпїЅ
-	// пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 20 пїЅпїЅ
+	public static final float CODE_LINES = 110000; 
 	private static final TimeUnit TIME_UNIT = TimeUnit.MILLISECONDS;
-	private static final int TIME_PERIOD = 60;
+	private static final int TIME_PERIOD = 200;
 
 	private boolean isRunningGame = false;
 	private Date dateOfCreation;
-	// пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	private String name;
 	private GameMap map;
 	private int[][] mapBinary;
@@ -30,18 +26,16 @@ public class Game {
 	private List<Team> teams = new ArrayList<>();
 	private List<User> players = new ArrayList<>();
 
-	// пїЅ GameTask пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅ-пїЅ-пїЅпїЅпїЅпїЅ", пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ Game
-	// пїЅпїЅпїЅпїЅ Game пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	
 	private GameTask gameTask;
 	private Timer timer = new Timer();
 	
-	private User userWin = new User();	//юзер який виграв в грі
-	private User userLoose = new User();	//юзер що програв
+	private User userWin = new User();
+	private User userLoose = new User();
 	
 	private List<GameChat> chat = new LinkedList<GameChat>();
 	
-	
-//==============================================================================	
+
 	public Game(String name, GameMap map, List<Team> teams, User creator) {
 		this.name = name;
 		this.map = map;
@@ -52,7 +46,6 @@ public class Game {
 		addPlayerAndSetTeam(creator);		
 	}
 
-	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	public boolean addPlayerAndSetTeam(User user) {
 		if (players.size() < map.getPlayerCount()) {
 			players.add(user);
@@ -69,7 +62,6 @@ public class Game {
 					break;
 				}
 			}
-			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 			if (map.getPlayerCount() == this.players.size()) {
 				start();
 			}
@@ -80,14 +72,12 @@ public class Game {
 
 	}
 
-	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 	public void start() {
 		isRunningGame = true;
 		gameTask = new GameTask(this);
 		timer.schedule(gameTask, 0, TIME_UNIT.toMillis(TIME_PERIOD));
 	}
 
-	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 	public void finish(User user) {
 		isRunningGame = false;
 		timer.cancel();	
@@ -102,9 +92,7 @@ public class Game {
 			}
 		}
 		System.out.println(getUserWin().getName()+" - Win!!! || "+getUserLoose().getName()+" Looser");
-		
-		//записати в базу +1 win
-		//записати в базу +1 loose
+		//TODO: add +1 win and +1 loos to database
 	}
 	
 	public void stop(){

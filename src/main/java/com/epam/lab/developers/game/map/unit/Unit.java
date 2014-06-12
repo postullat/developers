@@ -42,10 +42,8 @@ public abstract class Unit implements Active {
 
 		this.id = id;
 
-		// // TODO ��������
 		this.x = x * 50;
 		this.y = y * 50;
-		// //
 		this.rotationAngle = rotationAngle;
 		this.textures = textures;
 		this.name = name;
@@ -53,19 +51,16 @@ public abstract class Unit implements Active {
 		this.unitStatus = new UnitStatus();
 
 		HashSet<String> tmp = new HashSet<String>();
-	//	tmp.add("repair");
 		tmp.add("breakDown");
 		availableMethods.put(CoffeeMashine.class, tmp);
 
 		tmp = new HashSet<String>();
 		tmp.add("use");
-//		tmp.add("repair");
 		tmp.add("breakDown");
 		availableMethods.put(Printer.class, tmp);
 
 		tmp = new HashSet<String>();
 		tmp.add("use");
-	//	tmp.add("repair");
 		tmp.add("breakDown");
 		availableMethods.put(Server.class, tmp);
 
@@ -144,10 +139,10 @@ public abstract class Unit implements Active {
 	private void checkHeathFeature(Double feature) {
 		if (feature != null) {
 			if (unitStatus.getHealth() > 1 && unitStatus.getHealth() <= 100) {
-				unitStatus.setHealth(unitStatus.getHealth() + feature / 500);
+				unitStatus.setHealth(unitStatus.getHealth() + feature / 4000);
 			}
 			if (unitStatus.getMood() > 1 && unitStatus.getMood() <= 100) {
-				unitStatus.setMood(unitStatus.getMood() + feature / 100);
+				unitStatus.setMood(unitStatus.getMood() + feature / 2000);
 			}
 			if (unitStatus.getMood() > 100) {
 				unitStatus.setMood(100);
