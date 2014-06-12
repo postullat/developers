@@ -6,7 +6,7 @@ public class UserJson {
 
 	private String name;
 	private User.Info info;
-	private User.Stats stats;
+	private User.Statistic stats;
 	private float codeLines;
 	
 	public UserJson(User user) {
@@ -31,11 +31,11 @@ public class UserJson {
 		this.info = info;
 	}
 
-	public User.Stats getStats() {
+	public User.Statistic getStats() {
 		return stats;
 	}
 
-	public void setStats(User.Stats stats) {
+	public void setStats(User.Statistic stats) {
 		this.stats = stats;
 	}
 

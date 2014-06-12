@@ -9,9 +9,9 @@ import com.epam.lab.developers.game.map.unit.Unit;
 public class Team {
 
     private transient int id;
-    private List<Unit> units = new ArrayList<>(); // ��������
+    private List<Unit> units = new ArrayList<>();
     private transient List<ActiveObject> activeObjects = new ArrayList<>();
-    private transient float codeLines = 0; // ������� ���������� ����
+    private transient float codeLines = 0;
     private transient Unit activeUnit;
     private transient ActiveObject selectedActiveObject;
 

@@ -4,10 +4,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.epam.lab.developers.dao.ActiveObjectDAO;
-import com.epam.lab.developers.dao.MapDAO;
-import com.epam.lab.developers.dao.PassiveObjectDAO;
-import com.epam.lab.developers.dao.UnitDAO;
+import com.epam.lab.developers.dao.impl.ActiveObjectDAO;
+import com.epam.lab.developers.dao.impl.MapDAO;
+import com.epam.lab.developers.dao.impl.PassiveObjectDAO;
+import com.epam.lab.developers.dao.impl.UnitDAO;
 import com.epam.lab.developers.game.Team;
 import com.epam.lab.developers.game.map.GameMap;
 import com.epam.lab.developers.game.map.object.MapObject;

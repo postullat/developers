@@ -18,7 +18,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
-import com.epam.lab.developers.dao.UserDAO;
+import com.epam.lab.developers.dao.impl.UserDAO;
 import com.epam.lab.developers.data.DataHolder;
 import com.epam.lab.developers.entity.User;
 

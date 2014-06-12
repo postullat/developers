@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epam.lab.developers.setting.PropertyUtil;
-
 @WebServlet("/" + AboutController.VIEW_NAME)
 public class AboutController extends HttpServlet {
 

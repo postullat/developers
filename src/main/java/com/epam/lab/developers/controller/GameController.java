@@ -2,7 +2,6 @@ package com.epam.lab.developers.controller;
 
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +18,10 @@ public class GameController extends HttpServlet {
 
     }
 
-    public void init(ServletConfig config) throws ServletException {
-        // Метод який буде виконуватись при завантаженні сервлету
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        doPost(request, response); // переадресація запиту Get на метод Post
+        doPost(request, response);
 
     }
 

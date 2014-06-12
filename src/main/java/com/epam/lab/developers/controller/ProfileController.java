@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/" + ProfileController.VIEW_NAME)
 public class ProfileController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	protected static final String VIEW_NAME = "profile";
        

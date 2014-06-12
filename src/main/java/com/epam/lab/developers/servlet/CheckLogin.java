@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.epam.lab.developers.dao.UserDAO;
+import com.epam.lab.developers.dao.impl.UserDAO;
 import com.epam.lab.developers.data.DataHolder;
 import com.epam.lab.developers.entity.User;
 import com.google.gson.Gson;

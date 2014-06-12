@@ -7,6 +7,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import com.epam.lab.developers.entity.User;
 import com.epam.lab.developers.game.Game;
 import com.epam.lab.developers.game.Team;
@@ -17,16 +20,16 @@ public class DataHolder {
 
     private static final DataHolder INSTANCE = new DataHolder();
 
-    // static final Logger logger = Logger.getLogger(DataHolder.class);
+    static final Logger logger = Logger.getLogger(DataHolder.class);
     private Map<HttpSession, User> userSessions = new HashMap<>();
     private List<Game> games = new ArrayList<>();
     private Map<User, Game> userGames = new HashMap<>();
 
-    // static {
-    //
-    // PropertyConfigurator.configure(getInstance().getClass().getResource(
-    // "/log4j.properties"));
-    // }
+     static {
+    
+     PropertyConfigurator.configure(getInstance().getClass().getResource(
+     "/log4j.properties"));
+     }
 
     private DataHolder() {
     }
@@ -125,9 +128,9 @@ public class DataHolder {
                 this.games.remove(game);
             }
             this.userGames.remove(user);
-            // logger.debug(user.getName() + " exit the game" + game.getName()
-            // + " date of create " + game.getDateOfCreation()
-            // + " creator:" + game.getCreator());
+             logger.debug(user.getName() + " exit the game" + game.getName()
+             + " date of create " + game.getDateOfCreation()
+             + " creator:" + game.getCreator());
         }
     }
 

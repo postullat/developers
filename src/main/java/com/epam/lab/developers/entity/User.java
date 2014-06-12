@@ -8,7 +8,7 @@ public class User {
 	private String name;
 	private transient String password;
 	private Info info = null;
-	private Stats stats = null;
+	private Statistic stats = null;
 	private Team team;
 	
 	public Team getTeam() {
@@ -62,11 +62,11 @@ public class User {
 		this.info = info;
 	}
 
-	public Stats getStats() {
+	public Statistic getStats() {
 		return stats;
 	}
 
-	public void setStats(Stats stats) {
+	public void setStats(Statistic stats) {
 		this.stats = stats;
 	}
 
@@ -99,13 +99,13 @@ public class User {
 			
 	}
 	
-	public class Stats {
+	public class Statistic {
 
 		private int score;
 		private int winnings;
 		private int losings;
 		
-		public Stats(int score, int winnings, int losings) {
+		public Statistic(int score, int winnings, int losings) {
 			super();
 			this.score = score;
 			this.winnings = winnings;

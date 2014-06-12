@@ -7,11 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class ConnectController
- */
+
 @WebServlet("/connect")
 public class ConnectController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	protected static final String VIEW_NAME = "connect";
        
@@ -25,7 +24,7 @@ public class ConnectController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 	}
 
 }

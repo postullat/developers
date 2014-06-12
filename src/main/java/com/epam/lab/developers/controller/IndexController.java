@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/index.jsp")
 public class IndexController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
     public IndexController() {
