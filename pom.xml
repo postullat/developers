@@ -76,7 +76,7 @@
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
-				<filtering>false</filtering>
+				<filtering>true</filtering>
 			</resource>
 		</resources>
 
@@ -112,6 +112,7 @@
 				<jdbc-db-password>root</jdbc-db-password>
 				<jdbc-db-url>jdbc:mysql://${jdbc-db-host}:${jdbc-db-port}/${jdbc-db-name}</jdbc-db-url>
 				<jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+				<log4j-level>DEBUG</log4j-level>
 			</properties>
 		</profile>
 		<profile>
@@ -125,6 +126,7 @@
 				<jelastic-env-name>******</jelastic-env-name>
 				<jelastic-domain>*****</jelastic-domain>
 				<jdbc-db-url>jdbc:mysql://mysql-${jelastic-env-name}.${jelastic-domain}/${jdbc-db-name}</jdbc-db-url>
+				<log4j-level>ERROR</log4j-level>
 			</properties>
 		</profile>
 	</profiles>
