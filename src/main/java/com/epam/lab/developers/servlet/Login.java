@@ -34,44 +34,27 @@ public class Login extends HttpServlet {
 	static {
 		 PropertyConfigurator.configure(new Login().getClass().getResource(
 			    "/log4j.properties"));
-//		Properties props = new Properties();
-//		ClassLoader loader = Login.class.getClassLoader();
-//		InputStream stream = loader.getResourceAsStream("log4j.properties");
-//		try {
-//			props.load(stream);
-//			PropertyConfigurator.configure(props);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 	}
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+
 	public Login() {
 		super();
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
 		String name = request.getParameter("name_login");
 		String password = request.getParameter("password_login");
 		UserDAO userDAO = new UserDAO();
-		User user = null;
-		user = userDAO.getByName(name);// отримування користувача
+		User user = userDAO.getByName(name);
+		
 		if (user == null) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			response.getWriter().println("Such login doesn't exists");
@@ -96,7 +79,7 @@ public class Login extends HttpServlet {
 				}
 				if (isUserExists) {
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					response.getWriter().println("such login already logged");
+					response.getWriter().println("Such user is already logged in");
 				} else {
 					User playingUser = DataHolder.getInstance()
 							.getPlayingUserByName(user.getName());
