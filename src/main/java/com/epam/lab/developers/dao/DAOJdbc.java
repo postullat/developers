@@ -1,11 +1,7 @@
 package com.epam.lab.developers.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import com.epam.lab.developers.setting.PropertyUtil;
-import com.epam.lab.developers.setting.Settings;
 
 public abstract class DAOJdbc<T> extends JdbcConnection {
 
