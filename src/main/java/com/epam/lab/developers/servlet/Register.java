@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,23 +16,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.epam.lab.developers.dao.impl.UserDAO;
 import com.epam.lab.developers.data.DataHolder;
 import com.epam.lab.developers.entity.User;
-
-import org.apache.log4j.Logger;
+import com.epam.lab.developers.enums.RequestDataType;
+import com.epam.lab.developers.validator.Validator;
+import com.epam.lab.developers.validator.impl.EmailValidator;
+import com.epam.lab.developers.validator.impl.PasswordValidator;
+import com.epam.lab.developers.validator.impl.UserNameValidator;
+import com.epam.lab.developers.validator.impl.ValidationResult;
 
 @WebServlet("/register")
 public class Register extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
-	private static final String NAME = "name";
-	private static final String PASSWORD = "password";
-	private static final String REPEATED_PASSWORD = "r_password";
-	private static final String EMAIL = "email";
 	private static final String DEFAULT_USER_PHOTO = "user_no_avatar.png";
-	
 
 	static final Logger logger = Logger.getLogger(Register.class);
 
@@ -38,67 +40,42 @@ public class Register extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int p = 0;
-		/* отримування даних з форми реєстрації */
-		String name = request.getParameter(NAME);
-		String password = request.getParameter(PASSWORD);
-		String rPassword = request.getParameter(REPEATED_PASSWORD);
-		String eMail = request.getParameter(EMAIL);
-		String photo = DEFAULT_USER_PHOTO;
 
-		UserDAO userDAO = new UserDAO();
-		/* перевірка паролів */
-		if (password.contentEquals(rPassword) && !rPassword.contentEquals("")) {
-			p += 1;
+		Set<Validator> validators = new LinkedHashSet<Validator>();
+		List<ValidationResult> results = new LinkedList<ValidationResult>();
 
-		} else {
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			response.getWriter().println("Passwords mismatch");
-			logger.debug("Passwords mismatch pass1=" + MD5Generate(password) + "pass2=" + MD5Generate(rPassword));
+		validators.add(new UserNameValidator());
+		validators.add(new PasswordValidator());
+		validators.add(new EmailValidator());
+
+		for (Validator validator : validators) {
+			results.add(validator.validate(request));
 		}
-		User user = userDAO.getByName(name);
-		/* перевірка чи вже зареєстрований такий користувач */
-		if (user == null && !name.contentEquals("")) {
-			p += 1;
-		} else {
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			response.getWriter().println("Such login already exists");
-			logger.debug("login " + name + " already exists");
-		}
-		/* валідація мила */
-		if (validateMail(eMail)) {
-			p += 1;
-		} else {
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			response.getWriter().println("Such email doesn t correct");
-			logger.debug("Such email doesn t correct " + eMail);
-		}
-		/* добавляння користувача до бд */
-		if (p == 3) {
-			// System.out.println(MD5Generate(password));
-			User validatedUser = new User(name, MD5Generate(password), eMail, photo);
+
+		if (allFieldsPopulatedCorrectly(results)) {
+			User validatedUser = getUserFromValidationResults(results);
 			new UserDAO().insert(validatedUser);
 
 			HttpSession session = request.getSession();
 			DataHolder.getInstance().getUserSessions().put(session, validatedUser);
-			p = 0;
+		} else {
+			for(ValidationResult result : results){
+				
+				String message = result.getErrorMessage();
+				if(message!=null){
+					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					response.getWriter().println(message);
+					logger.debug(message.replaceAll("<br>", ""));
+				}
+			}
 		}
+
+
 
 	}
 
-	/**
-	 * @param pass
-	 *            - пароль у стрічковому форматі
-	 * @throws NoSuchAlgorithmException
-	 *             не існуючий алгоритм
-	 * @return згенерований пароль алгоритмом md5
-	 * */
-	public static String MD5Generate(String pass) {
+	public static String generateMD5(String pass) {
 		String hashpass = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
@@ -115,15 +92,35 @@ public class Register extends HttpServlet {
 		return hashpass;
 	}
 
-	/**
-	 * @param eMail
-	 *            - адреса пошти
-	 * @return true - адреса правильна; false - адреса не правильна
-	 * */
-	private boolean validateMail(String eMail) {
-		Pattern p = Pattern.compile("[a-zA-Z]*[0-9]*@[a-zA-Z]*.[a-zA-Z]*[a-zA-Z]");
-		Matcher m = p.matcher(eMail);
-		return m.matches();
+	private User getUserFromValidationResults(List<ValidationResult> results) {
+
+		User user = new User();
+
+		for (ValidationResult result : results) {
+			if (RequestDataType.USER_NAME == result.getDataType()) {
+				user.setName(result.getValidatedData());
+			}
+			if (RequestDataType.PASSWORD == result.getDataType()) {
+				user.setPassword(generateMD5(result.getValidatedData()));
+			}
+			if (RequestDataType.EMAIL == result.getDataType()) {
+				user.setInfo(user.new Info(result.getValidatedData(), DEFAULT_USER_PHOTO));
+			}
+		}
+
+		return user;
+
+	}
+
+	private boolean allFieldsPopulatedCorrectly(List<ValidationResult> results) {
+
+		for (ValidationResult result : results) {
+			if (!result.isSuccess()) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }
