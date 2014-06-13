@@ -121,12 +121,12 @@
 				<jdbc-db-name>developers</jdbc-db-name>
 				<jdbc-db-port>3306</jdbc-db-port>
 				<jdbc-db-username>root</jdbc-db-username>
-				<jdbc-db-password>****</jdbc-db-password>
+				<jdbc-db-password>sfVuqBC8U9</jdbc-db-password>
 				<jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-				<jelastic-env-name>******</jelastic-env-name>
-				<jelastic-domain>*****</jelastic-domain>
+				<jelastic-env-name>env-2869356</jelastic-env-name>
+				<jelastic-domain>jelastic.lunacloud.com</jelastic-domain>
 				<jdbc-db-url>jdbc:mysql://mysql-${jelastic-env-name}.${jelastic-domain}/${jdbc-db-name}</jdbc-db-url>
-				<log4j-level>ERROR</log4j-level>
+				<log4j-level>DEBUG</log4j-level>
 			</properties>
 		</profile>
 	</profiles>
