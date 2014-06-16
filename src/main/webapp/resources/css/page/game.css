@@ -3,40 +3,40 @@
 #gameHeader {
 	position: absolute;
 	margin: 0 auto;
-	line-height:39px;
-    font-family: Tahoma, Arial;
-    background: url(../../img/theme/body_top_bckg.jpg) no-repeat center top #171c20;
-    color:#bed7e6;
-    font-size:11px;
-    height: 370px;
-    width: 1000px;
-    left: 0;
-    right: 0;
-    z-index: 100;
+	line-height: 39px;
+	font-family: Tahoma, Arial;
+	background: url(../../img/theme/body_top_bckg.jpg) no-repeat center top
+		#171c20;
+	color: #bed7e6;
+	font-size: 11px;
+	height: 370px;
+	width: 1000px;
+	left: 0;
+	right: 0;
+	z-index: 100;
 }
 
-#listOfcountUserOnline{
-	 color:#fff;
-    text-align:center;
-    position: absolute;
+#listOfcountUserOnline {
+	color: #fff;
+	text-align: center;
+	position: absolute;
 	display: none;
 	left: 0;
-	top:15px;
-	line-height:normal; 
-	 text-align:left;
+	top: 15px;
+	line-height: normal;
+	text-align: left;
 }
 
-#listOfcountUserOnline li{
+#listOfcountUserOnline li {
 	margin-top: 5px;
 	float: left;
-	
 }
 
 #divMenuToggler {
 	width: 1000px;
 	height: 30px;
 	left: 0;
-    right: 0;
+	right: 0;
 	margin: -33px auto 0 auto;
 }
 
@@ -54,21 +54,22 @@
 }
 
 #gameMain {
-	background: url(../../img/theme/body_all_bckg_game.jpg) repeat-y top center;
+	background: url(../../img/theme/body_all_bckg_game.jpg) repeat-y top
+		center;
 }
 
 #gameName {
 	margin-bottom: 10px;
 	text-align: center;
-    font-size: 16pt;
-    font-family: "Trebuchet MS", "Verdana";
+	font-size: 16pt;
+	font-family: "Trebuchet MS", "Verdana";
 }
 
 #divPlayers {
 	height: 100px;
 	margin-bottom: 20px;
-    text-align: center;
-    font-family: "Trebuchet MS", "Verdana";
+	text-align: center;
+	font-family: "Trebuchet MS", "Verdana";
 }
 
 .divYou {
@@ -143,67 +144,65 @@
 	margin: 0 auto;
 	padding: 3px;
 	width: 96px;
-	font-size:14px;
+	font-size: 14px;
 	float: bottom;
-	color:#fff;
-	background-color:#445d6c;
+	color: #fff;
+	background-color: #445d6c;
 	cursor: pointer;
 }
 
 .activeObjectMenuItem:hover {
-	background-color:#f26513;
+	background-color: #f26513;
 }
 
 #unitOptions {
-    width: 500px;
-    height: 120px;
+	width: 500px;
+	height: 120px;
 	margin: 10px auto 0 auto;
 	float: left;
 }
 
 #gameInfo {
 	width: 500px;
-    height: 120px;
-    margin: 10px auto 0 auto;
-    float: left;
+	height: 120px;
+	margin: 10px auto 0 auto;
+	float: left;
 }
 
-.divMaxCodeLines{
+.divMaxCodeLines {
 	margin-top: 10px;
 	width: 250px;
 	height: 10px;
-	background-image: linear-gradient(bottom, rgb(148,148,148) 36%, rgb(255,255,255) 100%);
-	background-image: -o-linear-gradient(bottom, rgb(148,148,148) 36%, rgb(255,255,255) 100%);
-	background-image: -moz-linear-gradient(bottom, rgb(148,148,148) 36%, rgb(255,255,255) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgb(148,148,148) 36%, rgb(255,255,255) 100%);
-	background-image: -ms-linear-gradient(bottom, rgb(148,148,148) 36%, rgb(255,255,255) 100%);
-	
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.36, rgb(148,148,148)),
-		color-stop(1, rgb(255,255,255))
-	);
+	background-image: linear-gradient(bottom, rgb(148, 148, 148) 36%,
+		rgb(255, 255, 255) 100% );
+	background-image: -o-linear-gradient(bottom, rgb(148, 148, 148) 36%,
+		rgb(255, 255, 255) 100% );
+	background-image: -moz-linear-gradient(bottom, rgb(148, 148, 148) 36%,
+		rgb(255, 255, 255) 100% );
+	background-image: -webkit-linear-gradient(bottom, rgb(148, 148, 148) 36%,
+		rgb(255, 255, 255) 100% );
+	background-image: -ms-linear-gradient(bottom, rgb(148, 148, 148) 36%,
+		rgb(255, 255, 255) 100% );
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.36, rgb(148
+		, 148, 148) ), color-stop(1, rgb(255, 255, 255) ) );
 }
 
 .gameStatusBar {
 	margin-top: -10px;
 	margin-bottom: 10px;
 	height: 10px;
-	background-image: linear-gradient(bottom, rgb(107,30,30) 36%, rgb(255,255,255) 100%);
-	background-image: -o-linear-gradient(bottom, rgb(107,30,30) 36%, rgb(255,255,255) 100%);
-	background-image: -moz-linear-gradient(bottom, rgb(107,30,30) 36%, rgb(255,255,255) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgb(107,30,30) 36%, rgb(255,255,255) 100%);
-	background-image: -ms-linear-gradient(bottom, rgb(107,30,30) 36%, rgb(255,255,255) 100%);
-	
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.36, rgb(107,30,30)),
-		color-stop(1, rgb(255,255,255))
-	);
+	background-image: linear-gradient(bottom, rgb(107, 30, 30) 36%,
+		rgb(255, 255, 255) 100% );
+	background-image: -o-linear-gradient(bottom, rgb(107, 30, 30) 36%,
+		rgb(255, 255, 255) 100% );
+	background-image: -moz-linear-gradient(bottom, rgb(107, 30, 30) 36%,
+		rgb(255, 255, 255) 100% );
+	background-image: -webkit-linear-gradient(bottom, rgb(107, 30, 30) 36%,
+		rgb(255, 255, 255) 100% );
+	background-image: -ms-linear-gradient(bottom, rgb(107, 30, 30) 36%,
+		rgb(255, 255, 255) 100% );
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.36, rgb(107
+		, 30, 30) ), color-stop(1, rgb(255, 255, 255) ) );
 }
 
 .divUnitStatusBar {
@@ -232,103 +231,127 @@
 	font-size: 14pt;
 }
 
-#map_canvas{ 			/* встановлюємо ширину та висоту елементу canvas а також його межі*/
-	
-/*	width: 1000px;
+#map_canvas {
+	/* встановлюємо ширину та висоту елементу canvas а також його межі*/
+	/*	width: 1000px;
     height: 750px;*/
+	
 }
 
-#unit_canvas{
-    margin-top: -750px auto 0 auto;
- /*   width: 1000px;
-  height: 750px; */  
-    /*border: 4px white solid;*/
+#unit_canvas {
+	margin-top: -750px auto 0 auto;
+	/*   width: 1000px;
+  height: 750px; */
+	/*border: 4px white solid;*/
 }
 
-#div_chat{
-	background:#0D0C0C;
-	position:absolute;
-    top: 30%; /* Положение от нижнего края */
-    right: 5%; /* Положение от правого края */
-
+#div_chat {
+	background: #0D0C0C;
+	position: absolute;
+	top: 5%; /* Положение от нижнего края */
+	right: 7.5%; /* Положение от правого края */
 	font-size: 11pt;
 	text-align: center;
 	border: 3px solid #f2f2f2;
 	width: 270px;
-	height: 345px;
+	height: 545px;
 	padding: 10px;
 	border-radius: 15px;
 	margin: 10px;
 }
 
-#div_chat:hover{
-	
-	cursor: move;	
-}
-
-#div_chat:active{
-	
+#div_chat:hover {
 	cursor: move;
 }
 
+#div_chat:active {
+	cursor: move;
+}
 
-#output_chat{
-	
+#output_chat {
 	text-align: left;
-	font-size:10pt;
+	font-size: 10pt;
 	color: #000000;
 	background-color: white;
 	width: 257px;
-	height: 200px;
+	height: 390px;
 	font-size: 11pt;
 	line-height: 1.2;
 	padding: 5px;
+	overflow-y: scroll;
+	cursor:auto;
 }
 
-#input_chat{
+#output_chat::-webkit-scrollbar {
+	width: 16px;
+	background-color: #cccccc;
+}
+
+#output_chat::-webkit-scrollbar-thumb {
+	background-color: #2b88e6;
+	border-radius: 10px;
+}
+
+#output_chat::-webkit-scrollbar-thumb:hover {
+	background-color: #2b88e6;
+	border: 1px solid #333333;
+}
+
+#output_chat::-webkit-scrollbar-thumb:active {
+	background-color: #2b88e6;
+	border: 1px solid #333333;
+}
+
+#input_chat {
 	resize: none;
-	height: 20px;
+	height: 40px;
 }
 
-#s_Send{
-	
-	width:268px;
+#s_Send {
+	width: 268px;
 	height: 35px;
 	color: #fef4e9;
 	border: solid 1px #003366;
 	background: #3399ff;
-	background: -webkit-gradient(linear, left top, left bottom, from(#3399ff), to(#003366));
-	background: -moz-linear-gradient(top,  #3399ff,  #003366);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#3399ff', endColorstr='#003366');
+	background: -webkit-gradient(linear, left top, left bottom, from(#3399ff),
+		to(#003366) );
+	background: -moz-linear-gradient(top, #3399ff, #003366);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3399ff',
+		endColorstr='#003366' );
 }
 
-#s_Send:hover{
+#s_Send:hover {
 	background: #003366;
-	background: -webkit-gradient(linear, left top, left bottom, from(#003366), to(#3399ff));
-	background: -moz-linear-gradient(top,  #003366,  #3399ff);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
-	}
-	
-#s_Send:active{
+	background: -webkit-gradient(linear, left top, left bottom, from(#003366),
+		to(#3399ff) );
+	background: -moz-linear-gradient(top, #003366, #3399ff);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11',
+		endColorstr='#f06015' );
+}
+
+#s_Send:active {
 	color: #fef4e9;
 	border: solid 1px #003366;
 	background: #3399ff;
-	background: -webkit-gradient(linear, left top, left bottom, from(#3399ff), to(#003366));
-	background: -moz-linear-gradient(top,  #3399ff,  #003366);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#3399ff', endColorstr='#003366');
-	}
-#timerWaiting{
-	margin:  -750px auto 0 auto;
-	width: 1000px;
-    height: 750px;
-    position: absolute;
-    background: gray;
-    opacity: 0.5;
-  
+	background: -webkit-gradient(linear, left top, left bottom, from(#3399ff),
+		to(#003366) );
+	background: -moz-linear-gradient(top, #3399ff, #003366);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3399ff',
+		endColorstr='#003366' );
 }
-.timerImg{
-	 position:absolute;
-	 opacity: 1;
-	 top:300px;
-	 left:300px;
+
+#timerWaiting {
+	margin: -750px auto 0 auto;
+	width: 1000px;
+	height: 750px;
+	position: absolute;
+	background: gray;
+	opacity: 0.5;
+}
+
+.timerImg {
+	position: absolute;
+	opacity: 1;
+	top: 300px;
+	left: 300px;
 }

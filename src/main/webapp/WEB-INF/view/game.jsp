@@ -116,11 +116,11 @@
 					<div id="output_chat" name="output_chat">time - user: message</div>
 					</p>
 					<p>
-						<textarea id="input_chat" placeholder="Input your message"
+						<textarea id="input_chat" placeholder="Input your message and press Enter"
 							name="input_chat" cols="30" rows="1" contentEditable="false"></textarea>
 					</p>
 					<p>
-						<input type="submit" id="s_Send" name="s_Send" value="Send"
+						<input type="submit" id="s_Send" name="s_Send" value="Send (Enter)"
 							width="150">
 
 					</p>

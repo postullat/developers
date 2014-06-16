@@ -14,14 +14,13 @@ $(function() {
 	var lastDate = 0;
 	var sendDate = 0;
 	var new_time;
-	
-//	var sound = $("#audio1")[0];
-//	var on = $("#on");
-//	var off = $("#off");
-//	
-//	off.hide();
 
-		
+	
+	$("#input_chat").keyup(function(event){
+	    if(event.keyCode == 13){
+	    	s_Send.click();
+	    }
+	});	
 	s_Send.click(function() {				//відсилаємо повідомлення при кліку на кнопці Send
 		
 		var input_chat = $("#input_chat");	//зчитуємо текст з поля вводу	
@@ -85,9 +84,9 @@ $(function() {
 	}
 	
 	 $(document).ready(function(){			//функція для переміщення чату
-	    	
-	    	$(".block").draggable();
-	    	$(".block").droppable();
+//	    	$(".block").draggable({ axis: "y" });
+//	    	$( ".output_chat" ).draggable({ addClasses: false });
+//	    	$(".block").droppable();
 	    	
 	    });
 	 
