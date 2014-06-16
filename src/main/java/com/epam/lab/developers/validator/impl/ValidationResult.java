@@ -6,7 +6,7 @@ public class ValidationResult {
 
 	private boolean isSuccess;
 	private String errorMessage;
-	private String validatedData;
+	private Object validatedData;
 	private RequestDataType dataType;
 	
 	public boolean isSuccess() {
@@ -25,11 +25,12 @@ public class ValidationResult {
 		this.errorMessage = errorMessage;
 	}
 	
-	public String getValidatedData() {
+
+	public Object getValidatedData() {
 		return validatedData;
 	}
-	
-	public void setValidatedData(String validatedData) {
+
+	public void setValidatedData(Object validatedData) {
 		this.validatedData = validatedData;
 	}
 

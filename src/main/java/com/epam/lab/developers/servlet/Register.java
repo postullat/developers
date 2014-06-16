@@ -98,13 +98,13 @@ public class Register extends HttpServlet {
 
 		for (ValidationResult result : results) {
 			if (RequestDataType.USER_NAME == result.getDataType()) {
-				user.setName(result.getValidatedData());
+				user.setName((String)result.getValidatedData());
 			}
 			if (RequestDataType.PASSWORD == result.getDataType()) {
-				user.setPassword(generateMD5(result.getValidatedData()));
+				user.setPassword(generateMD5((String)result.getValidatedData()));
 			}
 			if (RequestDataType.EMAIL == result.getDataType()) {
-				user.setInfo(user.new Info(result.getValidatedData(), DEFAULT_USER_PHOTO));
+				user.setInfo(user.new Info((String)result.getValidatedData(), DEFAULT_USER_PHOTO));
 			}
 		}
 
