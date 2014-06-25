@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.epam.lab.developers</groupId>
+	<artifactId>DevelopersDbUp</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>How to annoy developer DB Schema Migrator</name>
+
+	<properties>
+		<environment>development</environment>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.googlecode.maven-migration-plugin</groupId>
+				<artifactId>maven-migration-plugin</artifactId>
+				<version>1.1</version>
+
+				<configuration>
+					<repository>${basedir}/repository</repository>
+					<environment>${environment}</environment>
+				</configuration>
+
+				<dependencies>
+					<dependency>
+						<artifactId>mysql-connector-java</artifactId>
+						<groupId>mysql</groupId>
+						<version>5.1.21</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>local</id>
+			<properties>
+				<environment>local-db</environment>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<environment>test-db</environment>
+			</properties>
+		</profile>
+	</profiles>
+
+	<repositories>
+		<repository>
+			<id>sap-supp</id>
+			<url>http://epualvisd0039:1111/install/maven</url>
+		</repository>
+		<repository>
+			<id>Maven Central</id>
+			<url>http://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+</project>
