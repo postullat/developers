@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.dao.impl.UserDAO;
 import com.epam.lab.developers.data.DataHolder;
-import com.epam.lab.developers.domain.User;
+import com.epam.lab.developers.entity.User;
 import com.epam.lab.developers.enums.RequestDataType;
 import com.epam.lab.developers.validator.Validator;
 import com.epam.lab.developers.validator.impl.EmailValidator;
