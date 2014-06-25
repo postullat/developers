@@ -1,6 +1,5 @@
 package com.epam.lab.developers.servlet;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -9,18 +8,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.dao.impl.UserDAO;
 import com.epam.lab.developers.data.DataHolder;
-import com.epam.lab.developers.entity.User;
+import com.epam.lab.developers.domain.User;
 import com.epam.lab.developers.enums.RequestDataType;
 import com.epam.lab.developers.validator.Validator;
 import com.epam.lab.developers.validator.impl.EmailValidator;
@@ -28,20 +29,17 @@ import com.epam.lab.developers.validator.impl.PasswordValidator;
 import com.epam.lab.developers.validator.impl.UserNameValidator;
 import com.epam.lab.developers.validator.impl.ValidationResult;
 
-@WebServlet("/register")
-public class Register extends HttpServlet {
+@Controller
+@RequestMapping("/register")
+public class Register {
 
-	private static final long serialVersionUID = 1L;
 	private static final String DEFAULT_USER_PHOTO = "user_no_avatar.png";
 
 	static final Logger logger = Logger.getLogger(Register.class);
 
-	public Register() {
-		super();
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> registerUser(HttpServletRequest request) {
 		Set<Validator> validators = new LinkedHashSet<Validator>();
 		List<ValidationResult> results = new LinkedList<ValidationResult>();
 
@@ -59,20 +57,18 @@ public class Register extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			DataHolder.getInstance().getUserSessions().put(session, validatedUser);
+
 		} else {
-			for(ValidationResult result : results){
-				
+			for (ValidationResult result : results) {
+
 				String message = result.getErrorMessage();
-				if(message!=null){
-					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					response.getWriter().println(message);
+				if (message != null) {
 					logger.debug(message.replaceAll("<br>", ""));
+					return new ResponseEntity<String>(message, HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 			}
 		}
-
-
-
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	public static String generateMD5(String pass) {
@@ -98,13 +94,13 @@ public class Register extends HttpServlet {
 
 		for (ValidationResult result : results) {
 			if (RequestDataType.USER_NAME == result.getDataType()) {
-				user.setName((String)result.getValidatedData());
+				user.setName((String) result.getValidatedData());
 			}
 			if (RequestDataType.PASSWORD == result.getDataType()) {
-				user.setPassword(generateMD5((String)result.getValidatedData()));
+				user.setPassword(generateMD5((String) result.getValidatedData()));
 			}
 			if (RequestDataType.EMAIL == result.getDataType()) {
-				user.setInfo(user.new Info((String)result.getValidatedData(), DEFAULT_USER_PHOTO));
+				user.setInfo(user.new Info((String) result.getValidatedData(), DEFAULT_USER_PHOTO));
 			}
 		}
 

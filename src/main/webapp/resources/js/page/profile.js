@@ -39,6 +39,9 @@ $(function() {
 	var loadProfile = function() {
 		$.ajax({
 			url: "check-login",
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json",
+			data: {"userName":"unknown"},
 			success: function(user) {
 				userName.html(user.name);
 				userEmail.html(user.info.email);
@@ -78,7 +81,7 @@ $(function() {
 				url: "check-login",
 				contentType: "application/x-www-form-urlencoded",
 				dataType: "json",
-				data: {"user_name":tmp[1]},
+				data: {"userName":tmp[1]},
 		 success: function(user) {
 //отримуємо дані з БД і заповнюємо сторінку даними  
 				userName.html(user.name);

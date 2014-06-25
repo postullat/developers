@@ -1,6 +1,6 @@
 package com.epam.lab.developers.servlet.json;
 
-import com.epam.lab.developers.entity.User;
+import com.epam.lab.developers.domain.User;
 
 public class UserJson {
 

@@ -1,29 +1,26 @@
 package com.epam.lab.developers.controller;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@WebServlet("/error-404")
-public class ErrorController extends HttpServlet {
+/**
+ * Handle user requests and redirect to the jsp page
+ * 
+ * @author Volodymyr_Bondarchuk
+ *
+ */
+
+@Controller
+@RequestMapping("/" + ErrorController.VIEW_NAME)
+public class ErrorController {
 	
-	private static final long serialVersionUID = 1L;
 	protected static final String VIEW_NAME = "error-404";
        
 
-    public ErrorController() {
-        super();
+    @RequestMapping(method=RequestMethod.GET)
+    public String showPage(){
+    	return "view/"+VIEW_NAME;
     }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/WEB-INF/view/" + VIEW_NAME + ".jsp";
-		request.getRequestDispatcher(url).forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
 
 }

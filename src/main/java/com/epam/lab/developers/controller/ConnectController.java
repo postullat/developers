@@ -1,30 +1,25 @@
 package com.epam.lab.developers.controller;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Handle user requests and redirect to the jsp page
+ * 
+ * @author Volodymyr_Bondarchuk
+ *
+ */
 
-@WebServlet("/connect")
-public class ConnectController extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
+@Controller
+@RequestMapping("/" + ConnectController.VIEW_NAME)
+public class ConnectController {
+
 	protected static final String VIEW_NAME = "connect";
-       
-    public ConnectController() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/WEB-INF/view/connect.jsp";
-		request.getRequestDispatcher(url).forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	@RequestMapping(method = RequestMethod.GET)
+	public String showPage() {
+		return "view/" + VIEW_NAME;
 	}
 
 }

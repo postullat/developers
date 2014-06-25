@@ -10,8 +10,9 @@ $(function() {
 		$.ajax({
 			url : "create-game",
 			contentType : "application/x-www-form-urlencoded",
+			dataType: "text",
 			data : {
-				"message" : "join_to_game",
+				"command" : "join_to_game",
 				"gameName" : element.id
 			},
 			success : function(data) {
@@ -28,7 +29,7 @@ $(function() {
 			url : "get-game-data",
 			contentType : "application/x-www-form-urlencoded",
 			data : {
-				"message" : "get_game_info",
+				"command" : "get_game_info",
 				"gameName" : element.find(".gameNameCell").html()
 			},
 			success : function(gameInfo) {
@@ -90,8 +91,10 @@ $(function() {
 		$.ajax({
 			url : "create-game",
 			contentType : "application/x-www-form-urlencoded",
+			dataType: "text",
 			data : {
-				"message" : "create_new_game"
+				"command" : "create_new_game",
+				"gameName" : "new_game"
 			},
 			success : function(data) {
 				location.replace("/developers/game");

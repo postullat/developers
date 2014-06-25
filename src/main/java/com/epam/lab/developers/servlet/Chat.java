@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.lab.developers.data.DataHolder;
 import com.epam.lab.developers.data.LoginData;
-import com.epam.lab.developers.entity.User;
+import com.epam.lab.developers.domain.User;
 import com.epam.lab.developers.game.Game;
 import com.epam.lab.developers.game.GameChat;
 import com.google.gson.Gson;

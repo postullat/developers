@@ -1,88 +1,77 @@
 package com.epam.lab.developers.servlet;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.data.DataHolder;
 import com.epam.lab.developers.data.LoginData;
 import com.epam.lab.developers.data.MapManager;
-import com.epam.lab.developers.entity.User;
+import com.epam.lab.developers.domain.User;
 import com.epam.lab.developers.game.Team;
 import com.epam.lab.developers.game.map.GameMap;
 
-/**
- * Servlet implementation class GreateGame
- */
-@WebServlet("/create-game")
-public class CreateGame extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@Controller
+@RequestMapping("/create-game")
+public class CreateGame {
+
 	static final Logger logger = Logger.getLogger(CreateGame.class);
+	private static final String CREATE_NEW_GAME_COMMAND = "create_new_game";
+	private static final String JOIN_TO_GAME_COMMAND = "join_to_game";
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public CreateGame() {
-		super();
-	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-	}
+	
+	@RequestMapping(method = {RequestMethod.POST, RequestMethod.GET})
+	
+	public @ResponseBody ResponseEntity<String> executeCommand(@RequestParam String command, @RequestParam String gameName, HttpServletRequest request, HttpServletResponse response) {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		String message = request.getParameter("message");
-		if (null != message) {
-			User user = LoginData.userLogined(request);
-			if (message.equals("create_new_game")) { // запит на створення гри
-				if (!DataHolder.getInstance().isUserPlaying(user)) {
-					createGame(user);
-					logger.debug(user.getName() + " has created the game");
-				}
-			}
-			if (message.equals("join_to_game")) { // запит про приєднання до гри
-				if (!DataHolder.getInstance().isUserPlaying(user)) {
-					// отимуєм id гри до якої користувач хоче приєднатися
-					String gameName = request.getParameter("gameName");
-					if (null != gameName) {
-						if (DataHolder.getInstance().joinToGame(gameName, user)) {
-							logger.debug(user.getName() + " join to game:"
-									+ gameName);
-						} else {
-							response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-							response.getWriter()
-									.println(
-											"Amount of users has reached limit in this game");
-						}
-					}
-				}
+		User user = LoginData.userLogined(request);
+
+		if (command.equals(CREATE_NEW_GAME_COMMAND) && !DataHolder.getInstance().isUserPlaying(user)) {
+			createGame(user);
+			logger.debug(user.getName() + " has created the game");
+			return new ResponseEntity<String>(HttpStatus.OK);
+		}
+
+		if (command.equals(JOIN_TO_GAME_COMMAND) && !DataHolder.getInstance().isUserPlaying(user)) { 
+
+			if (gameName != null && DataHolder.getInstance().joinToGame(gameName, user)) {
+				
+				logger.debug(user.getName() + " join to game:" + gameName);
+				return new ResponseEntity<String>(HttpStatus.OK);
+				
+			} else {
+
+				logger.debug("Game="+gameName+":Amount of users has reached limit in this game");
+				return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
+
+		return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
 
 	private void createGame(User user) {
 		int gameNumber = DataHolder.getInstance().getAmountOfGames() + 1;
 		String name = "game " + gameNumber;
-		GameMap map = null;
 		try {
 			MapManager mapManager = new MapManager("test");
-			map = mapManager.getMap();
+			GameMap map = mapManager.getMap();
 			List<Team> teams = mapManager.getTeams();
 			DataHolder.getInstance().createGame(name, map, teams, user);
 		} catch (SQLException e) {
+			logger.error("Can not retrive map");
 			e.printStackTrace();
 		}
 	}

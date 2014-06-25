@@ -1,46 +1,36 @@
 package com.epam.lab.developers.servlet;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.epam.lab.developers.data.DataHolder;
-import com.epam.lab.developers.entity.User;
+import com.epam.lab.developers.domain.User;
 import com.google.gson.Gson;
 
-@WebServlet("/count-user-online")
-public class CountUserOnline extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-
-    public CountUserOnline() {
-        super();
-       
-    }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+@Controller
+@RequestMapping("/count-user-online")
+public class CountUserOnline {
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public @ResponseBody String getCountUserOnline(){ 
 		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Map<HttpSession, User> map = DataHolder.getInstance().getUserSessions();
 		List<User> userList = new ArrayList<>(map.values());
-		List<String> name = new ArrayList<>();
+		List<String> nickNames = new ArrayList<>();
 		
 		for(User user: userList){
-			name.add(user.getName());
+			nickNames.add(user.getName());
 		}
-		response.getWriter().println(new Gson().toJson(name));
-		
+		 return new Gson().toJson(nickNames);
 	}
 
 }

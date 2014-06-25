@@ -1,48 +1,35 @@
 package com.epam.lab.developers.servlet;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.data.DataHolder;
 import com.epam.lab.developers.data.LoginData;
-import com.epam.lab.developers.entity.User;
+import com.epam.lab.developers.domain.User;
 import com.epam.lab.developers.game.Game;
 import com.google.gson.Gson;
 
-/**
- * Servlet implementation class TimerWaitingForGame
- */
-@WebServlet("/timer-waiting")
-public class TimerWaitingForGame extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	public TimerWaitingForGame() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+@Controller
+@RequestMapping("/timer-waiting")
+public class TimerWaitingForGame {
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody String doPost(HttpServletRequest request) {
 		
-		boolean p = false;
 		User user = LoginData.userLogined(request);
 		if (null != user) {
 			Game game = DataHolder.getInstance().getGame(user);
 			if (null != game) {
-				p = game.isRunningGame();
-				String json = new Gson().toJson(p);
-				response.getWriter().println(json);
+				
+				return new Gson().toJson(game.isRunningGame());
 			}
 		}
+		
+		return "{'error':'user or game object equals null'}";
 	}
 
 }

@@ -1,27 +1,26 @@
 package com.epam.lab.developers.servlet;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.data.DataHolder;
-import com.epam.lab.developers.entity.User;
+import com.epam.lab.developers.domain.User;
 import com.epam.lab.developers.validator.Validator;
 import com.epam.lab.developers.validator.impl.CredentialValidator;
 import com.epam.lab.developers.validator.impl.ValidationResult;
 
-@WebServlet("/login")
-public class Login extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
+@Controller
+@RequestMapping("/login")
+public class Login {
 
 	static final Logger logger = Logger.getLogger(Login.class);
 
@@ -29,14 +28,8 @@ public class Login extends HttpServlet {
 		PropertyConfigurator.configure(new Login().getClass().getResource("/log4j.properties"));
 	}
 
-	public Login() {
-		super();
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@RequestMapping(method = RequestMethod.POST)
+	protected @ResponseBody ResponseEntity<String> logginUser(HttpServletRequest request) {
 
 		Validator validator = new CredentialValidator();
 		ValidationResult result = new ValidationResult();
@@ -51,11 +44,12 @@ public class Login extends HttpServlet {
 
 			String message = result.getErrorMessage();
 			if (message != null) {
-				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				response.getWriter().println(message);
 				logger.debug(message.replaceAll("<br>", ""));
+				return new ResponseEntity<String>(message, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
+		
+		return new ResponseEntity<String>(HttpStatus.OK);
 
 	}
 

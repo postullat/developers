@@ -49,6 +49,6 @@ $(function() {
 		});
 	};
 
-	setInterval(getStatusBar, 60);
+	setInterval(getStatusBar, 60);//was 60
 
 });

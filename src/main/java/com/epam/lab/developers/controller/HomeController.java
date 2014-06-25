@@ -1,43 +1,37 @@
 package com.epam.lab.developers.controller;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.epam.lab.developers.data.DataHolder;
 
-@WebServlet("/" + HomeController.VIEW_NAME)
-public class HomeController extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
+/**
+ * Handle user requests and redirect to the jsp page
+ * 
+ * @author Volodymyr_Bondarchuk
+ *
+ */
+
+@Controller
+@RequestMapping("/" + HomeController.VIEW_NAME)
+public class HomeController {
+
 	protected static final String VIEW_NAME = "home";
-    
-   public HomeController() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@RequestMapping(method = RequestMethod.GET)
+	public String showPage(HttpServletRequest request) {
 		
-		HttpSession session = request.getSession();
-		if(DataHolder.getInstance().getUserSessions().containsKey(session)) {
-			String url = "/WEB-INF/view/connect.jsp";
-			request.getRequestDispatcher(url).forward(request, response);
-		}
-		
-		else{
-			String url = "/WEB-INF/view/" + VIEW_NAME + ".jsp";
-			request.getRequestDispatcher(url).forward(request, response);
-		}
-		
-		
-	}
+//		HttpSession session = request.getSession();
+//		
+//		if (DataHolder.getInstance().getUserSessions().containsKey(session)) {
+//			return "view/connect";
+//		}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		return "view/" + VIEW_NAME;
 	}
 
 }

@@ -1,64 +1,50 @@
 package com.epam.lab.developers.servlet;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.data.DataHolder;
 import com.epam.lab.developers.data.LoginData;
-import com.epam.lab.developers.entity.User;
+import com.epam.lab.developers.domain.User;
 import com.epam.lab.developers.game.Game;
 import com.epam.lab.developers.servlet.json.GameJson;
 import com.epam.lab.developers.servlet.json.UserJson;
 import com.google.gson.Gson;
 
-/**
- * Servlet implementation class GetGameData
- */
-@WebServlet("/get-game-data")
-public class GetGameData extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetGameData() {
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
+@Controller
+@RequestMapping("/get-game-data")
+public class GetGameData {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message = request.getParameter("message");
-		if(null != message){
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public @ResponseBody String getData(@RequestParam String command, @RequestParam String gameName, HttpServletRequest request) {
+	
+		
+		
+		if(command!=null){
 			User user = LoginData.userLogined(request);
 			if (null != user) {
-				if (message.equals("get_game_info")) {
-					String gameName = request.getParameter("gameName");
+				if (command.equals("get_game_info")) {
 					Game gameByName = DataHolder.getInstance().getGameByName(gameName);
 					if (null != gameByName) {
 						GameJson gameJson = DataHolder.getInstance().getGameJson(gameByName);
 						String json = new Gson().toJson(gameJson);
-						response.getWriter().println(json);
+						return json;
 					}
 				}
 				Game game = DataHolder.getInstance().getGame(user);
-				if (null != game) {
-					if (message.equals("get_players")) { // отримати список гравців
+				if (game != null && command.equals("get_players")) {
 						Set<User> opponents = new HashSet<>(game.getPlayers());
 						opponents.remove(user);
 						List<UserJson> opponentsJson = new ArrayList<>();
@@ -75,15 +61,17 @@ public class GetGameData extends HttpServlet {
 							Game.CODE_LINES
 						};
 						String json = new Gson().toJson(youOpponentsMaxCL);
-						response.getWriter().println(json);
+						return json;
 					}
-					if (message.equals("get_game_name")) { // отримати назву гри
+					if (command.equals("get_game_name")) { // отримати назву гри
 						String json = new Gson().toJson(game.getName());
-						response.getWriter().println(json);
+						
+						return json;
 					}
-				}
 			}
 		}
+		
+		return "{'error':'incorrect command name:"+command+"'}";
 	}
 
 }

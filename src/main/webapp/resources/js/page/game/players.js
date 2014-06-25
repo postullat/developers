@@ -13,7 +13,8 @@ $(function() {
 					url : "get-game-data",
 					contentType : "application/x-www-form-urlencoded",
 					data : {
-						"message" : "get_players"
+						"command" : "get_players",
+						"gameName" : "unknown"
 					},
 					success : function(youOpponentsMaxCL) {
 						var you = youOpponentsMaxCL[0];
@@ -81,11 +82,11 @@ $(function() {
 
  	var timerListOfPlayers = setInterval(function() {
 		listOfPlayers();
-	}, 60);
+	}, 60); //was 60
 
 	var timerTimerWaiting = setInterval(function() {
 		timerWaiting();
-	}, 1000);
+	}, 1000); //was 1000
 
 	listOfPlayers();
 	timerWaiting();

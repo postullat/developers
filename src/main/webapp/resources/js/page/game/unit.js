@@ -101,7 +101,7 @@ $(function() {
 					url : "get_moving_unit",
 					contentType : "application/x-www-form-urlencoded",
 					data : {
-						"message" : "give_me_moving_units"
+						"command" : "give_me_moving_units"
 					},
 					success : function(unitsAndSelectedUnit) {
 						if (unitsAndSelectedUnit != null) {
@@ -132,7 +132,9 @@ $(function() {
 								}
 							}
 							
+							if(selectedUnit != null){
 								draw(unitSelectionImg,selectedUnit.x,selectedUnit.y,0);
+							}
 						}
 
 					},
@@ -143,5 +145,5 @@ $(function() {
 	};
 
 	getUnits();
-	setInterval(getMovingUnits, 60);
+	setInterval(getMovingUnits, 60);//was 60
 });

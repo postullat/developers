@@ -1,66 +1,49 @@
 package com.epam.lab.developers.servlet;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.epam.lab.developers.data.DataHolder;
 import com.epam.lab.developers.data.LoginData;
-import com.epam.lab.developers.entity.User;
+import com.epam.lab.developers.domain.User;
 import com.epam.lab.developers.game.Game;
 import com.epam.lab.developers.servlet.json.UserWinLooseJson;
 import com.google.gson.Gson;
 
-@WebServlet("/finish-game")
-public class FinishGame extends HttpServlet {
+@Controller
+@RequestMapping("/finish-game")
+public class FinishGame {
 
-    private static final long serialVersionUID = 1L;
+	@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	String showResult(@RequestParam String command, HttpServletRequest request, HttpServletResponse response) {
 
-    public FinishGame() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+		User user = LoginData.userLogined(request);
+		if (user != null) {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			Game game = DataHolder.getInstance().getGame(user);
 
-    }
+			if (game != null && command.equals("getWinLoose")) {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-            IOException {
+				UserWinLooseJson winLoose = new UserWinLooseJson();
+				winLoose.setUserWin(game.getUserWin().getName());
+				winLoose.setUserLoose(game.getUserLoose().getName());
 
-        User user = LoginData.userLogined(request);
-        if(null != user) {
+				String json = new Gson().toJson(winLoose);
 
-            String command = request.getParameter("what"); // перевіряємо чи запит на запис даних в чат чи на зчитування
-            Game game = DataHolder.getInstance().getGame(user); // беремо в гру в якій є зараз юзер
+				return json;
 
-            if(game != null) {
+			}
 
-                if(command.equals("getWinLoose")) { // якщо запит на запис даних в чат
-
-                    UserWinLooseJson winLoose = new UserWinLooseJson();
-                    winLoose.setUserWin(game.getUserWin().getName());
-                    winLoose.setUserLoose(game.getUserLoose().getName());
-
-                    String json = new Gson().toJson(winLoose);
-                    // try{
-                    //
-                    response.getWriter().println(json);
-                    // System.out.println(json);
-                    // } catch(Exception e){
-                    // e.printStackTrace();
-                    // System.out.println("userWin="+userWin+" userLoose="+userLoose);
-                    // System.out.println("{\"userWin\":"+userWin+",\"userLoose\":"+userLoose+"}");
-                    // }
-                }
-
-            }
-
-        }
-    }
+		}
+		
+		return "{error:user object equal null or game object equals null}";
+	}
 
 }
