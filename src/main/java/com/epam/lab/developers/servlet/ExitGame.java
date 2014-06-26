@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.data.DataHolder;
 import com.epam.lab.developers.data.LoginData;
-import com.epam.lab.developers.domain.User;
+import com.epam.lab.developers.entity.User;
 
 @Controller
 @RequestMapping("/exit-game")

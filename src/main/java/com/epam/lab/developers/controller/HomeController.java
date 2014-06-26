@@ -25,11 +25,11 @@ public class HomeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String showPage(HttpServletRequest request) {
 		
-//		HttpSession session = request.getSession();
-//		
-//		if (DataHolder.getInstance().getUserSessions().containsKey(session)) {
-//			return "view/connect";
-//		}
+		HttpSession session = request.getSession();
+		
+		if (DataHolder.getInstance().getUserSessions().containsKey(session)) {
+			return "view/connect";
+		}
 
 		return "view/" + VIEW_NAME;
 	}

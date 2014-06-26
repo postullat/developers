@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.data.DataHolder;
-import com.epam.lab.developers.domain.User;
+import com.epam.lab.developers.entity.User;
 import com.epam.lab.developers.validator.Validator;
 import com.epam.lab.developers.validator.impl.CredentialValidator;
 import com.epam.lab.developers.validator.impl.ValidationResult;
