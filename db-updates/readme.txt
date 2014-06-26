@@ -1,0 +1,1 @@
+mvn migration:bootstrap -Plocal set up database

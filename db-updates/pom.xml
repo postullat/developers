@@ -55,10 +55,6 @@
 
 	<repositories>
 		<repository>
-			<id>sap-supp</id>
-			<url>http://epualvisd0039:1111/install/maven</url>
-		</repository>
-		<repository>
 			<id>Maven Central</id>
 			<url>http://repo1.maven.org/maven2</url>
 			<releases>
