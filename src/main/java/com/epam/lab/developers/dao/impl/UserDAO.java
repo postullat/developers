@@ -14,11 +14,10 @@ import com.epam.lab.developers.entity.User.Statistic;
 
 public class UserDAO extends DAOJdbc<User> {
 
-	private static final String ADD_USER_NAME_AND_PASSWORD_QUERY = "INSERT INTO user(name, password) VALUES(?,?)";
-	private static final String ADD_USER_INFO_QUERY = "INSERT INTO info(user, email, photo) VALUES(?,?,?)";
+	private static final String ADD_USER_NAME_AND_PASSWORD_QUERY = "INSERT INTO user(name, password, email, photo, role) VALUES(?,?,?,?,'ROLE_PLAYER')";
 	private static final String ADD_USER_STATISTIC_QUERY = "INSERT INTO stats(user, score, winnings, losings) VALUES(?, ?, ?, ?)";
 
-	private static final String SELECT_USER_DATA = "SELECT * FROM user AS t1 JOIN info AS t2 ON t1.name = ? AND t2.user = t1.id";
+	private static final String SELECT_USER_DATA = "SELECT * FROM user AS t1 WHERE t1.name = ?";
 	private static final String SELECT_USER_STATISTIC = "SELECT * FROM stats WHERE user = ?";
 	
 	private static final String UPDATE_USER_NAME_AND_PASSWORD_QUERY = "UPDATE user SET name = ?, password = ? WHERE id = ?";
@@ -38,6 +37,7 @@ public class UserDAO extends DAOJdbc<User> {
 		String passChecker = null;
 		String photo = null;
 		String email = null;
+		String role = null;
 		int score = 0;
 		int winnings = 0;
 		int losings = 0;
@@ -52,7 +52,8 @@ public class UserDAO extends DAOJdbc<User> {
 				passChecker = rs.getString("password");
 				email = rs.getString("email");
 				photo = rs.getString("photo");
-				user = new User(nameChecker, passChecker, email, photo);
+				role = rs.getString("role");
+				user = new User(nameChecker, passChecker, email, photo, role);
 				user.setId(id);
 
 				String sqlStats = "SELECT * FROM stats WHERE user = '" + id + "'";
@@ -81,6 +82,8 @@ public class UserDAO extends DAOJdbc<User> {
 			PreparedStatement stmt = conn.prepareStatement(ADD_USER_NAME_AND_PASSWORD_QUERY);
 			stmt.setString(1, entity.getName());
 			stmt.setString(2, entity.getPassword());
+			stmt.setString(3, entity.getInfo().getEmail());
+			stmt.setString(4, entity.getInfo().getPhoto());
 			stmt.executeUpdate();
 			Statement stmtId = conn.createStatement();
 			String sql = "SELECT id FROM user WHERE name = '" + entity.getName() + "'";
@@ -93,18 +96,6 @@ public class UserDAO extends DAOJdbc<User> {
 			e.printStackTrace();
 			logger.error("Can't execute sql query:" + ADD_USER_NAME_AND_PASSWORD_QUERY + "; name=" + entity.getName() + "; password="
 					+ entity.getPassword());
-		}
-
-		try {
-			PreparedStatement stmtInfo = conn.prepareStatement(ADD_USER_INFO_QUERY);
-			stmtInfo.setInt(1, id);
-			stmtInfo.setString(2, entity.getInfo().getEmail());
-			stmtInfo.setString(3, entity.getInfo().getPhoto());
-			stmtInfo.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.error("Can't execute sql query:" + ADD_USER_INFO_QUERY + "; userId=" + id + "; email=" + entity.getInfo().getEmail()
-					+ "; photo=" + entity.getInfo().getPhoto());
 		}
 
 		try {
@@ -132,6 +123,7 @@ public class UserDAO extends DAOJdbc<User> {
 		String passChecker = null;
 		String photo = null;
 		String email = null;
+		String role = null;
 		int score = 0;
 		int winnings = 0;
 		int losings = 0;
@@ -149,7 +141,8 @@ public class UserDAO extends DAOJdbc<User> {
 				passChecker = rs.getString("password");
 				email = rs.getString("email");
 				photo = rs.getString("photo");
-				user = new User(nameChecker, passChecker, email, photo);
+				role = rs.getString("role");
+				user = new User(nameChecker, passChecker, email, photo, role);
 				user.setId(id);
 				
 				PreparedStatement stmt2 = conn.prepareStatement(SELECT_USER_STATISTIC);

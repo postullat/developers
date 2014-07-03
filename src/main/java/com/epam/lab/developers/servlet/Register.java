@@ -71,6 +71,7 @@ public class Register {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
+	@Deprecated
 	public static String generateMD5(String pass) {
 		String hashpass = null;
 		try {
@@ -97,7 +98,7 @@ public class Register {
 				user.setName((String) result.getValidatedData());
 			}
 			if (RequestDataType.PASSWORD == result.getDataType()) {
-				user.setPassword(generateMD5((String) result.getValidatedData()));
+				user.setPassword((String) result.getValidatedData());
 			}
 			if (RequestDataType.EMAIL == result.getDataType()) {
 				user.setInfo(user.new Info((String) result.getValidatedData(), DEFAULT_USER_PHOTO));

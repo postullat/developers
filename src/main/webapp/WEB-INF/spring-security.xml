@@ -1,0 +1,39 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+
+	<http pattern="/resources/**" security="none"/>
+	<http pattern="/count-user-online" security="none"/>
+	<http pattern="/list-of-games" security="none"/>
+	<http pattern="/register" security="none"/>
+	
+	<http auto-config="true">
+		<intercept-url pattern="/home" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/connect" access="ROLE_PLAYER,ROLE_ADMIN" />
+		<intercept-url pattern="/profile" access="ROLE_PLAYER,ROLE_ADMIN" />
+		<intercept-url pattern="/game" access="ROLE_PLAYER,ROLE_ADMIN" />
+		<intercept-url pattern="/about" access="ROLE_PLAYER,ROLE_ADMIN" />
+		<intercept-url pattern="/admin" access="ROLE_ADMIN" />
+		<form-login 
+		    login-page="/home" 
+		    default-target-url="/connect"
+			authentication-failure-url="/home?error" 
+			username-parameter="username"
+			password-parameter="password"
+			always-use-default-target="true" />
+		<logout logout-success-url="/home?logout"  logout-url="/logout" />
+
+		<csrf/>
+	</http>
+
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="customUserDetailsService" />
+	</authentication-manager>
+
+<beans:bean id="customUserDetailsService" class="com.epam.lab.developers.security.CustomUserDetailsService"/>
+</beans:beans>

@@ -6,6 +6,7 @@ public class User {
 	
 	private int id;
 	private String name;
+	private String role;
 	private transient String password;
 	private Info info = null;
 	private Statistic stats = null;
@@ -23,10 +24,11 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public User(String name, String password, String email, String photo) {
+	public User(String name, String password, String email, String photo, String role) {
 		super();
 		this.name = name;
 		this.password = password;
+		this.role = role;
 		this.info = new Info(email, photo);
 	}
 
@@ -69,6 +71,16 @@ public class User {
 	public void setStats(Statistic stats) {
 		this.stats = stats;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
 
 	public class Info {
 

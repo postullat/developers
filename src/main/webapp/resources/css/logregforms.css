@@ -15,14 +15,14 @@
 }
 	
 
-#divFormLogin {
+/*#divFormLogin {
     display: none;
 }
 
 #divFormRegister {
     display: none;
 }
-
+*/
 #registerField {
     display: none;
     margin: 10px 0 0 100px;
@@ -30,7 +30,7 @@
 }
 
 #btnLogout {
-    display: none;
+    /*display: none;*/
     margin: 10px 0 0 100px;
     cursor: pointer;
 }

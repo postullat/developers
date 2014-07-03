@@ -31,7 +31,11 @@ $(function() {
 	/*запускається на початку, перевіряє чи користувач зареєстрований*/
 	var verifyLogin = function() {
 		$.ajax({
+			type: "POST",
 			url: "check-login",
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json",
+			data: {"userName":"unknown"},
 			success: function(user) {
 				if (null != user) {
 					btnLogin.hide();
@@ -39,10 +43,10 @@ $(function() {
 					registerField.show();
 					registerField.html("Hello, " + user.name + "!");
 					enableBtnProfile();
-					btnLogout.show();
+//					btnLogout.show();
 					countUser();
 				} else {
-					btnLogout.hide();
+//					btnLogout.hide();
 					disableBtnProfile();
 				}
 			}
@@ -68,48 +72,48 @@ $(function() {
 	});
 	
 	/*показує форму реєстрації*/
-	btnRegister.click(function () {
-		divFormRegister.toggle('slow');
-	});
+//	btnRegister.click(function () {
+//		divFormRegister.toggle('slow');
+//	});
 	
 	/*показує форму логування*/
-	btnLogin.click(function () {
-		divFormLogin.toggle('slow');
-	});
+//	btnLogin.click(function () {
+//		divFormLogin.toggle('slow');
+//	});
 	
 	var init = function() {
 		countUser();
 		verifyLogin();
 	};
 	
-	/*вихід користувача*/
-	btnLogout.click(function() {
-		$.ajax({
-			url: "logout",
-			success: function(data) {
-				location.href="home";
-			}
-		});
-	});
+//	/*вихід користувача*/
+//	btnLogout.click(function() {
+//		$.ajax({
+//			url: "logout",
+//			success: function(data) {
+//				location.href="home";
+//			}
+//		});
+//	});
 	
-	/*авторизація користувача*/
-	formLogin.submit( function(){
-		$.ajax({
-			url: "login",
-			contentType: "application/x-www-form-urlencoded",
-			dataType: "text",
-			data: formLogin.serialize(),
-			success: function(data) {
-				divFormLogin.hide();
-				verifyLogin();
-				location.replace("/developers/connect"); 
-			},
-			error: function(error) {
-				$("#errorLogin").html(error.responseText);
-			}
-		});
-		return false;
-	});
+//	/*авторизація користувача*/
+//	formLogin.submit( function(){
+//		$.ajax({
+//			url: "login",
+//			contentType: "application/x-www-form-urlencoded",
+//			dataType: "text",
+//			data: formLogin.serialize(),
+//			success: function(data) {
+////				divFormLogin.hide();
+//				verifyLogin();
+////				location.replace("/developers/connect"); 
+//			},
+//			error: function(error) {
+//				$("#errorLogin").html(error.responseText);
+//			}
+//		});
+//		return false;
+//	});
 	/*добавлення коритувача до бази даних*/
 	formRegister.submit(function() {
 		$.ajax({

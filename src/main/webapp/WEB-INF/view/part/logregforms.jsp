@@ -3,7 +3,7 @@
 	    	
 			
 			
-			<form id="formLogin"  method="post">
+			<form id="formLogin" action="j_spring_security_check"  method="post">
 
 				<table id="tableLogin" align="center">
 				
@@ -11,16 +11,16 @@
 					
 					<div id="sidebar_top"></div>
 					<label id="errorLogin" name="errorLogin" class="formError"></label></td></tr>
-					<tr><td>name:</td><td><input type="text" id="name_login" name="name_login"></td></tr>
-					<tr><td>pass:</td><td><input type ="password" id="password_login" name="password_login"></td></tr>
-					<tr><td colspan="2"><input class="login_button" type="submit" id="s_Login" name="a" value="Login">
+					<tr><td>name:</td><td><input type="text" id="name_login" name="username" value=""></td></tr>
+					<tr><td>pass:</td><td><input type ="password" id="password_login" name="password" value=""></td></tr>
+					<tr><td colspan="2"><input class="login_button" type="submit" id="s_Login" name="submit" value="Login">
 					
 					<div id="sidebar_bottom"></div>
 					
 					</td></tr>
 			
 				</table>
-
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
 			
 		
