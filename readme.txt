@@ -1,0 +1,1 @@
+-- Please see "doc/Configure_local_env.docx" file in order to setup project on local workstation --
