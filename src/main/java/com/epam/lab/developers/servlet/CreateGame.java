@@ -1,5 +1,6 @@
 package com.epam.lab.developers.servlet;
 
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.data.DataHolder;
-import com.epam.lab.developers.data.LoginData;
 import com.epam.lab.developers.data.MapManager;
+import com.epam.lab.developers.entity.MyUserDetails;
 import com.epam.lab.developers.entity.User;
 import com.epam.lab.developers.game.Team;
 import com.epam.lab.developers.game.map.GameMap;
@@ -34,9 +36,10 @@ public class CreateGame {
 	
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.GET})
 	
-	public @ResponseBody ResponseEntity<String> executeCommand(@RequestParam String command, @RequestParam String gameName, HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody ResponseEntity<String> executeCommand(@RequestParam String command, @RequestParam String gameName, Principal principal, HttpServletRequest request, HttpServletResponse response) {
 
-		User user = LoginData.userLogined(request);
+		User user = ((MyUserDetails) ((Authentication) principal).getPrincipal()).getUser();
+
 
 		if (command.equals(CREATE_NEW_GAME_COMMAND) && !DataHolder.getInstance().isUserPlaying(user)) {
 			createGame(user);

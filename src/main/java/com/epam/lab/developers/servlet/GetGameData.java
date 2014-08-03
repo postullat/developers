@@ -1,5 +1,6 @@
 package com.epam.lab.developers.servlet;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.data.DataHolder;
-import com.epam.lab.developers.data.LoginData;
+import com.epam.lab.developers.entity.MyUserDetails;
 import com.epam.lab.developers.entity.User;
 import com.epam.lab.developers.game.Game;
 import com.epam.lab.developers.servlet.json.GameJson;
@@ -28,12 +30,12 @@ public class GetGameData {
 
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public @ResponseBody String getData(@RequestParam String command, @RequestParam String gameName, HttpServletRequest request) {
+	public @ResponseBody String getData(@RequestParam String command, @RequestParam String gameName, Principal principal, HttpServletRequest request) {
 	
 		
 		
 		if(command!=null){
-			User user = LoginData.userLogined(request);
+			User user = ((MyUserDetails) ((Authentication) principal).getPrincipal()).getUser();
 			if (null != user) {
 				if (command.equals("get_game_info")) {
 					Game gameByName = DataHolder.getInstance().getGameByName(gameName);

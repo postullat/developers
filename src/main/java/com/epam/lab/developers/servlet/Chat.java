@@ -2,6 +2,7 @@ package com.epam.lab.developers.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.Authentication;
+
 import com.epam.lab.developers.data.DataHolder;
-import com.epam.lab.developers.data.LoginData;
+import com.epam.lab.developers.entity.MyUserDetails;
 import com.epam.lab.developers.entity.User;
 import com.epam.lab.developers.game.Game;
 import com.epam.lab.developers.game.GameChat;
@@ -32,10 +35,10 @@ public class Chat extends HttpServlet {
 
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+    protected void doPost(HttpServletRequest request ,Principal principal, HttpServletResponse response) throws ServletException,
             IOException {
 
-        User user = LoginData.userLogined(request);
+    	User user = ((MyUserDetails) ((Authentication) principal).getPrincipal()).getUser();
         if(null != user) {
 
             String command = request.getParameter("what"); // перевіряємо чи запит на запис даних в чат чи на зчитування

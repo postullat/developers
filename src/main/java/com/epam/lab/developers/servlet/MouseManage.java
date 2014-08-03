@@ -1,11 +1,13 @@
 package com.epam.lab.developers.servlet;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.lab.developers.data.DataHolder;
-import com.epam.lab.developers.data.LoginData;
+import com.epam.lab.developers.entity.MyUserDetails;
 import com.epam.lab.developers.entity.User;
 import com.epam.lab.developers.game.Game;
 import com.epam.lab.developers.game.Team;
@@ -35,7 +37,7 @@ public class MouseManage {
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody
 	String doPost(@RequestParam String message, @RequestParam(required=false) String f_x, @RequestParam(required=false) String f_y, @RequestParam(required=false) String s_x,
-			@RequestParam(required=false) String s_y, HttpServletRequest request) {
+			@RequestParam(required=false) String s_y, Principal principal, HttpServletRequest request) {
 
 		int finishXCoord, StartXCoord;
 		int finishYCoord, StartYCoord;
@@ -44,7 +46,7 @@ public class MouseManage {
 		int startY = 0;
 		int startX = 0;
 		if (null != message) {
-			User user = LoginData.userLogined(request);
+			User user = ((MyUserDetails) ((Authentication) principal).getPrincipal()).getUser();
 			if (null != user) {
 				Game game = DataHolder.getInstance().getGame(user);
 				if (null != game) {
