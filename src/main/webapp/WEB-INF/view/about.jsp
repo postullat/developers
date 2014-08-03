@@ -22,7 +22,6 @@
 	    	<div id="content">
 	    		
 	    			<h1><strong>About game</strong></h1>
-	    			<%@include file="/WEB-INF/view/part/logregforms.jsp" %>
 	 
 <p>The game is a combination of simple arcade and strategy.
 After initializing cards there are two teams. Teams are a group of programmers.
