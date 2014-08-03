@@ -21,18 +21,19 @@
     	<div id="main">
 	    	<div id="content">
 	    		<div id="sidebar">
-			    	<div id="sidebar_top"></div>
 			        <div id="sidebar_text">
-			        	<center><h1>Game info</h1></center><br>
+			        	<h2>Users online - ${usersOnline.size()}</h2>
+			        	<c:forEach  var="user" items="${usersOnline}" > 
+			        	<div class="activeUser">${user}</div>
+			        	</c:forEach>
 			        </div>
-			        <div id="sidebar_bottom"></div>
 	    		</div>
 	    		<div id="text">
 	    			<div id="listOfGame">
 	    				<h1><strong>List of games:</strong></h1>
 						<div id="divTableGames">
 							<table id="tableGames" cellpadding="5px">
-								
+
 							</table>
 						</div>
 					</div>

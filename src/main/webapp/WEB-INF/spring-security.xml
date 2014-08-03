@@ -16,8 +16,9 @@
 		<intercept-url pattern="/connect" access="ROLE_PLAYER,ROLE_ADMIN" />
 		<intercept-url pattern="/profile" access="ROLE_PLAYER,ROLE_ADMIN" />
 		<intercept-url pattern="/game" access="ROLE_PLAYER,ROLE_ADMIN" />
-		<intercept-url pattern="/about" access="ROLE_PLAYER,ROLE_ADMIN" />
+		<intercept-url pattern="/about" access="IS_AUTHENTICATED_ANONYMOUSLY,ROLE_PLAYER,ROLE_ADMIN" />
 		<intercept-url pattern="/admin" access="ROLE_ADMIN" />
+		<intercept-url pattern="/create-game" access="ROLE_PLAYER,ROLE_ADMIN" />
 		<form-login 
 		    login-page="/home" 
 		    default-target-url="/connect"
@@ -25,7 +26,11 @@
 			username-parameter="username"
 			password-parameter="password"
 			always-use-default-target="true" />
-		<logout logout-success-url="/home?logout"  logout-url="/logout" />
+		<logout logout-success-url="/home?logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
+		
+		<session-management>
+	        <concurrency-control max-sessions="1" session-registry-alias="sessionRegistry"/>
+	    </session-management>
 
 		<csrf/>
 	</http>

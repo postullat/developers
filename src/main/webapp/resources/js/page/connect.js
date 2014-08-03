@@ -23,7 +23,7 @@ $(function() {
 			}
 		});
 	};
-	
+
 	var showGameInfo = function(element) {
 		$.ajax({
 			url : "get-game-data",
@@ -44,47 +44,45 @@ $(function() {
 		});
 	};
 
-	/* виводить список створених неактивних ігор */
 	var getListOfGames = function() {
-		$
-				.ajax({
-					url : "list-of-games",
-					success : function(list) {
-						if (list.length != 0) {
-							/* вивід всіх ігор у табличці */
-							tableGames.html("<tr bgcolor=\"#0d1114\">"
-									+ "<th>Game name</th>"
-									+ "<th>Time of creation</th>"
-									+ "<th>Creator</th>"
-									+ "<th width=\"115px\">Join game</th>"
-									+ "</tr>");
-							for ( var i = 0; i < list.length; ++i) {
-								var joinString = "<tr><td class=\"gameNameCell\">" + list[i].name
-										+ "</td><td>" + list[i].dateOfCreation
-										+ "</td><td>" + list[i].creator.name
-										+ "</td>";
-								if (list[i].isJoinAvailable) {
-									joinString += "<td><div id='"
-											+ list[i].name
-											+ "' class='buttonJoin' >Join to game</div></td></tr>";
-								} else {
-									joinString += "<td></td></tr>";
-								}
-								tableGames.append(joinString);
-							}
-							$("#tableGames tr").click(function() {
-								showGameInfo($(this));
-							});
-							buttonJoin = $(".buttonJoin");
-							buttonJoin.click(function() {
-								joinFunction(this);
-							});
-						} else {
-							tableGames.html("None of games isn't created");
-						}
-
-					}
-				});
+//		$.ajax({
+//			url : "list-of-games",
+//					success : function(list) {
+//						if (list.length != 0) {
+//							/* ГўГЁГўВіГ¤ ГўГ±ВіГµ ВіГЈГ®Г° Гі ГІГ ГЎГ«ГЁГ·Г¶Ві */
+//							tableGames.html("<tr bgcolor=\"#0d1114\">"
+//									+ "<th>Game name</th>"
+//									+ "<th>Time of creation</th>"
+//									+ "<th>Creator</th>"
+//									+ "<th width=\"115px\">Join game</th>"
+//									+ "</tr>");
+//							for ( var i = 0; i < list.length; ++i) {
+//								var joinString = "<tr><td class=\"gameNameCell\">" + list[i].name
+//										+ "</td><td>" + list[i].dateOfCreation
+//										+ "</td><td>" + list[i].creator.name
+//										+ "</td>";
+//								if (list[i].isJoinAvailable) {
+//									joinString += "<td><div id='"
+//											+ list[i].name
+//											+ "' class='buttonJoin' >Join to game</div></td></tr>";
+//								} else {
+//									joinString += "<td></td></tr>";
+//								}
+//								tableGames.append(joinString);
+//							}
+//							$("#tableGames tr").click(function() {
+//								showGameInfo($(this));
+//							});
+//							buttonJoin = $(".buttonJoin");
+//							buttonJoin.click(function() {
+//								joinFunction(this);
+//							});
+//						} else {
+//							tableGames.html("None of games isn't created");
+//						}
+//
+//					}
+//				});
 	};
 
 	createGame.click(function() {
@@ -105,7 +103,7 @@ $(function() {
 		});
 	});
 
-	// оновляє список ігор
+	// Г®Г­Г®ГўГ«ГїВє Г±ГЇГЁГ±Г®ГЄ ВіГЈГ®Г°
 	var listOfGamesTimer = setInterval(function() {
 		getListOfGames();
 	}, 1000);
